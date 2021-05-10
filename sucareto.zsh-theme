@@ -1,11 +1,13 @@
 # 修改 https://github.com/ChesterYue/ohmyzsh-theme-passion
-# plugins=(
-# git
-# zsh-autosuggestions
-# zsh-completions
-# zsh-history-substring-search
-# zsh-syntax-highlighting
-# )
+
+# 自动安装插件，处理完成后会注释掉
+git clone https://github.com/zsh-users/zsh-autosuggestions ../plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-completions ../plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-history-substring-search ../plugins/zsh-history-substring-search
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ../plugins/zsh-syntax-highlighting
+sed -i 's/plugins=(git)/plugins=(\ngit\nzsh-autosuggestions\nzsh-completions\nzsh-history-substring-search\nzsh-syntax-highlighting\n)/' ~/.zshrc
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="sucareto"/' ~/.zshrc
+sed -i '4,10s/^/# /' sucareto.zsh-theme && exit
 
 # time
 function real_time() {
@@ -61,11 +63,9 @@ output_command_execute_after() {
         cost="0${cost}"
     fi
     cost="$fg_no_bold[yellow][${cost}s]"
-    # cost="$fg_no_bold[cyan][${cost}s]"
 
-    # echo -e "${cost}";
-    # echo -e "";
     printf "%${COLUMNS}s\n" "${command_status} ${cost}${color_reset}"
+    #echo -e "\t\t${cost}${color_reset} ${command_status} "
 }
 
 # command execute before
@@ -84,15 +84,10 @@ current_time_millis() {
 # REF: http://zsh.sourceforge.net/Doc/Release/Functions.html
 precmd() {
     # last_cmd
-    # local last_cmd_return_code=$?;
-    # output command execute after
     output_command_execute_after $?
 
     # update_git_status
     update_git_status
-
-    # output command execute after
-    # output_command_execute_after $last_cmd_return_code;
 }
 
 # set option
