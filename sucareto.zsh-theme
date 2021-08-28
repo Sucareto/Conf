@@ -7,7 +7,7 @@ git clone https://github.com/zsh-users/zsh-history-substring-search $ZSH/custom/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 sed -i 's/plugins=(git)/plugins=(\ngit\nzsh-autosuggestions\nzsh-completions\nzsh-history-substring-search\nzsh-syntax-highlighting\n)/' ~/.zshrc
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="sucareto"/' ~/.zshrc
-sed -i '4,10s/^/# /' sucareto.zsh-theme && exit
+sed -i '4,10s/^/# /' $ZSH/custom/themes/sucareto.zsh-theme && exit
 
 # time
 function real_time() {
