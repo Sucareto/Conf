@@ -1,10 +1,10 @@
 # 修改 https://github.com/ChesterYue/ohmyzsh-theme-passion
 
 # 自动安装插件，处理完成后会注释掉
-git clone https://github.com/zsh-users/zsh-autosuggestions ../plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions ../plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-history-substring-search ../plugins/zsh-history-substring-search
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ../plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-completions $ZSH/custom/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-history-substring-search $ZSH/custom/plugins/zsh-history-substring-search
+git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 sed -i 's/plugins=(git)/plugins=(\ngit\nzsh-autosuggestions\nzsh-completions\nzsh-history-substring-search\nzsh-syntax-highlighting\n)/' ~/.zshrc
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="sucareto"/' ~/.zshrc
 sed -i '4,10s/^/# /' sucareto.zsh-theme && exit
@@ -108,3 +108,7 @@ TRAPALRM() {
 
 # prompt
 PROMPT='$(real_time) $(directory) $(git_status) '
+
+function ipls(){
+        ip -4 addr show $* | grep inet | awk '{print $2}'
+}
