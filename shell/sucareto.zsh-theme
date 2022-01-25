@@ -123,9 +123,9 @@ function ipls(){
 }
 
 function update_theme(){
-	wget https://raw.githubusercontent.com/Sucareto/Conf/master/shell/sucareto.zsh-theme -O /tmp/sucareto.zsh-theme || return
+	wget https://raw.githubusercontent.com/Sucareto/Conf/master/shell/sucareto.zsh-theme -O ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme.new || return
 	cp ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme.bak
-	mv /tmp/sucareto.zsh-theme ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme
+	mv ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme.new ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme
 	echo "主题更新完成。"
 }
 function update_plugins(){
