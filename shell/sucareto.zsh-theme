@@ -1,13 +1,22 @@
 # 修改 https://github.com/ChesterYue/ohmyzsh-theme-passion
 
 # 自动安装插件，处理完成后会注释掉
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions $ZSH/custom/plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-history-substring-search $ZSH/custom/plugins/zsh-history-substring-search
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions || return 1
+fi
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-completions ]; then
+    git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions || return 1
+fi
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search ]; then
+    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search || return 1
+fi
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting || return 1
+fi
+echo "主题插件安装完成。"
 sed -i 's/plugins=(git)/plugins=(\ngit\nzsh-autosuggestions\nzsh-completions\nzsh-history-substring-search\nzsh-syntax-highlighting\n)/' ~/.zshrc
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="sucareto"/' ~/.zshrc
-sed -i '4,10s/^/# /' $ZSH/custom/themes/sucareto.zsh-theme && exit
+sed -i '4,19s/^/# /' ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme && source ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme
 
 # time
 function real_time() {
@@ -111,4 +120,18 @@ PROMPT='$(real_time) $(directory) $(git_status) '
 
 function ipls(){
         ip -4 addr show $* | grep inet | awk '{print $2}'
+}
+
+function update_theme(){
+	wget https://raw.githubusercontent.com/Sucareto/Conf/master/shell/sucareto.zsh-theme -O /tmp/sucareto.zsh-theme || return
+	cp ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme.bak
+	mv /tmp/sucareto.zsh-theme ~/.oh-my-zsh/custom/themes/sucareto.zsh-theme
+	echo "主题更新完成。"
+}
+function update_plugins(){
+	git -C ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull
+	git -C ~/.oh-my-zsh/custom/plugins/zsh-completions pull
+	git -C ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search pull
+	git -C ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull
+	echo "插件更新完成。"
 }
