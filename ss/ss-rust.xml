@@ -1,0 +1,14 @@
+
+<service>
+  <id>xs</id>
+  <executable>Y:\Service\ssservice.exe</executable>
+  <name>Shadowsocks Service</name>
+  <description>Shadowsocks rust</description>
+
+  <arguments>local --config service-config.json --acl bypass.acl</arguments>
+  <workingdirectory>Y:\Service\</workingdirectory>
+  <priority>Normal</priority>
+  <stoptimeout>15 sec</stoptimeout>
+  <startmode>Automatic</startmode>
+  <log mode="none"/>
+</service>
