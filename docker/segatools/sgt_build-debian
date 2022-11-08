@@ -1,0 +1,5 @@
+FROM debian:stable-slim
+LABEL description="segatools debian 编译环境"
+WORKDIR /segatools
+RUN sed -i "s/http.*debian/http:\/\/opentuna.cn\/debian/" /etc/apt/sources.list && \
+apt update && apt install meson make zip clang ninja-build git mingw-w64 gawk -y && apt clean

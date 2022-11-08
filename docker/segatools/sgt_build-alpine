@@ -1,0 +1,5 @@
+FROM alpine
+LABEL description="segatools alpine 编译环境"
+WORKDIR /segatools
+RUN sed -i 's/dl-cdn.alpinelinux.org/opentuna.cn/g' /etc/apk/repositories && \
+apk add --no-cache mingw-w64-gcc zip meson gawk make binutils
